@@ -1,9 +1,10 @@
 import express from "express";
 import path from "path";
 import http from "http";
-const __dirname = path.resolve();
+
 const sequelize = require("./db/db");
 import routes from "./routes";
+const { swaggerUi, specs } = require("./config/swagger.config");
 
 const app = express();
 
@@ -19,6 +20,9 @@ sequelize
 
 //Route
 routes(app);
+
+//Swagger
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 const server = http.createServer(app);
 
