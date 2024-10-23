@@ -40,7 +40,7 @@ const options = {
     ],
   },
   // looks for configuration in specified directories
-  apis: [path.join(__dirname, "/src/controllers/*.js")], //Swagger 파일 연동
+  apis: [path.join(__dirname, "/src/routes/*.js")], //Swagger 파일 연동
   //   apis: ["./routes/*.js"],
 };
 

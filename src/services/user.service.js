@@ -1,25 +1,41 @@
 const User = require("../db/user");
-// import { getCrrentDate } from "../lib/date.helper";
-// import db from "../lib/db";
-// import { ARTICLE_TYPE, ERROR_MESSAGE } from "../lib/constants";
 
 function userService() {
   const getAllUsers = async () => {
     try {
-      //   const result = await db.article.delete({
-      //     where: {
-      //       id: articleId,
-      //     },
-      //   });
       const users = await User.findAll(); // 모든 유저 정보 조회
       return users;
+    } catch (error) {
+      throw error;
+    }
+  };
 
-      //   const returnValue = {
-      //     totalPage: total,
-      //     articleList: returnArticles,
-      //   };
+  const insertUser = async (unique_data) => {
+    try {
+      const newUser = {
+        unique_data,
+      };
+      const existUser = await User.count({
+        where: {
+          unique_data,
+        },
+      });
 
-      //   return returnValue;
+      if (existUser > 0) {
+        throw new Error("user Exist");
+      } else {
+        const user = await User.create(newUser);
+        return user;
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const getUser = async (id) => {
+    try {
+      const user = await User.findByPk(id); // 모든 유저 정보 조회
+      return user;
     } catch (error) {
       throw error;
     }
@@ -27,6 +43,8 @@ function userService() {
 
   return {
     getAllUsers,
+    insertUser,
+    getUser,
   };
 }
 
