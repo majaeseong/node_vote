@@ -18,6 +18,11 @@ const Room = sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: false,
     },
+    question: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
     status: {
       type: DataTypes.ENUM("ready", "start", "end"),
       allowNull: false,

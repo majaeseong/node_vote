@@ -5,6 +5,8 @@ import http from "http";
 //불러와야 동기화가 됨
 import User from "./db/user";
 import Room from "./db/room";
+import RoomUser from "./db/room-user";
+import UserSelection from "./db/user-selection";
 
 const sequelize = require("./db/db");
 import routes from "./routes";
@@ -33,6 +35,9 @@ routes(app);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 const server = http.createServer(app);
+
+//Socket
+// const wss = SocketIO(server);
 
 const handleListen = () => console.log("Listening on http://localhost:3033");
 
